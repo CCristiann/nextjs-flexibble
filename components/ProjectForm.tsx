@@ -1,10 +1,8 @@
-import { SessionInterface } from '@/interfaces/interfaces'
 import React, { ChangeEvent, useState } from 'react'
 import Image from 'next/image'
 
 import ProjectFormField from './ProjectFormField'
 import { uploadImage } from '@/utils/actions'
-import { redirect } from 'next/navigation'
 
 import { formProps } from '@/interfaces/interfaces'
 import { useRouter } from 'next/navigation'
@@ -12,10 +10,11 @@ import CategoryMenu from './CategoryMenu'
 
 import { categoryFilters } from '@/costants/costants'
 import Button from './Button'
+import { Session } from 'next-auth'
 
 type Props = {
     type: string,
-    session: SessionInterface
+    session: Session
 }
 
 const ProjectForm = ({type, session} : Props) => {

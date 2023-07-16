@@ -6,11 +6,9 @@ import Modal from '@/components/Modal'
 import ProjectForm from '@/components/ProjectForm'
 import { useSession } from 'next-auth/react'
 
-import { SessionInterface } from '@/interfaces/interfaces'
-
 const CreateProject = () => {
 
-  const { data: session } = useSession()
+  const { data: session }  = useSession()
 
   return (
     <Modal>

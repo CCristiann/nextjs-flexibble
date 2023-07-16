@@ -1,13 +1,5 @@
 import { Session } from "next-auth";
 
-export interface SessionInterface extends Session {
-    user: {
-      id: string;
-      name: string;
-      email: string;
-      image: string;
-    };
-  }
 
 export interface formProps {
   title: string
