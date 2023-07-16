@@ -31,7 +31,7 @@ const RelatedProjects = ({ params } : Props) => {
     }
 
     getRelatedProjects()
-  }, [])
+  }, [params.id])
 
   if(projects){
   return (

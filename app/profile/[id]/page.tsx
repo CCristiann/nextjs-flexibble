@@ -28,7 +28,7 @@ const ProfilePage = ({ params } : Props) => {
       
     }
     getUserDetails()
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     const getRelatedProjects = async () => {
@@ -39,7 +39,7 @@ const ProfilePage = ({ params } : Props) => {
     }
 
     getRelatedProjects()
-  }, [])
+  }, [params.id])
 
   return (
     <section className='w-full flex flex-col gap-16 paddings mb-20'>
