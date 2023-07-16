@@ -18,7 +18,7 @@ const Modal = ({ children } : Props) => {
 
     const onClose = useCallback(() => {
         router.push('/')
-    }, [overlay])
+    }, [router])
 
     const handleOverlayClick = useCallback((e: React.MouseEvent) => {
         if(e.target === overlay.current && onClose){

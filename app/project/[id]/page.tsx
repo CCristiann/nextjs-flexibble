@@ -23,7 +23,7 @@ type Props = {
 const ProjectPage = ({ params } : Props) => {
 
     const [isLoading, setIsLoading] = useState(true)
-    const [project, setProject] = useState()
+    const [project, setProject] = useState<any>()
 
     useEffect(() => {
         const getProjectDetails = async () => {
@@ -36,7 +36,7 @@ const ProjectPage = ({ params } : Props) => {
 
 
         getProjectDetails()
-    }, [])
+    }, [params.id])
 
 
   return (

@@ -12,12 +12,8 @@ import { categoryFilters } from '@/costants/costants'
 import Button from './Button'
 import { Session } from 'next-auth'
 
-type Props = {
-    type: string,
-    session: Session
-}
 
-const ProjectForm = ({type, session} : Props) => {
+const ProjectForm = ({ type, session } : any) => {
 
   const router = useRouter()
  

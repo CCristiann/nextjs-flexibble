@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 const ProfileMenu = () => {
   
-    const { data: session } = useSession()
+    const { data: session } : any = useSession()
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -34,13 +34,13 @@ const ProfileMenu = () => {
         <div className='absolute right-4 top-20 flex flex-col gap-5 border-[1px] bg-white w-full shadow-md rounded-md max-w-[18rem] p-6 text-sm z-50'>
             <div className='flex flex-col items-center gap-4'>
               <Image
-               src={session?.user?.image as string}
+               src={session?.user?.image}
                width={60}
                height={60}
                alt="Profile Picture"
                className="rounded-full"
             />
-            <h4 className='font-semibold text-base'>{session?.user?.name as string}</h4>
+            <h4 className='font-semibold text-base'>{session?.user?.name}</h4>
             </div>
             <div className='flex flex-col gap-3'>
               <Link href='/'>

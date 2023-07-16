@@ -16,8 +16,8 @@ const ProfilePage = ({ params } : Props) => {
 
   const { data : session } = useSession()
 
-  const [user, setUser] = useState()
-  const [projects, setProjects] = useState()
+  const [user, setUser] = useState<any>()
+  const [projects, setProjects] = useState<any>()
 
   useEffect(() => {
     const getUserDetails = async () => {
@@ -82,7 +82,7 @@ const ProfilePage = ({ params } : Props) => {
         <section>
           <h4 className='font-semibold text-lg'>Recent Work</h4>
           <div className='projects-grid'>
-          {projects.map((relatedProject : any, i: number) => (
+          {projects.map((relatedProject: any, i: number) => (
             <ProjectCard key={i} project={relatedProject}/>
           ))}
          </div>

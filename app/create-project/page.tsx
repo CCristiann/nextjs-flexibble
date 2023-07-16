@@ -5,10 +5,11 @@ import React from 'react'
 import Modal from '@/components/Modal'
 import ProjectForm from '@/components/ProjectForm'
 import { useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
 
 const CreateProject = () => {
 
-  const { data: session }  = useSession()
+  const { data: session } = useSession()
 
   return (
     <Modal>
