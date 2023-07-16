@@ -15,10 +15,6 @@ const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
 
-export const metadata = {
-  title: "Flexibble",
-  description: "App made with Next JS",
-};
 
 interface SessionProviderProps {
   session: Session | null
@@ -39,6 +35,12 @@ interface SessionProviderProps {
       : ''
     }`}
     lang="en">
+      <head>
+        <meta
+          name="description"
+          content="Dribble clone made with Next JS" />
+        <title>Flexibble</title>
+      </head>
       <body className={inter.className}>
       <SessionProvider session={session}>
         <Navbar />
