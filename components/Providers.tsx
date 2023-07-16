@@ -53,7 +53,9 @@ const Providers = () => {
                     className="sign-in_btn_provider"
                     key={provider.name}
                     onClick={() =>
-                      signIn(provider.id)
+                      signIn(provider.id, {
+                        callbackUrl: "https://nextjs-flexibble-ccristiann.vercel.app",
+                      })
                     }
                   >
                     Sign in with

@@ -53,8 +53,8 @@ const ProjectPage = ({ params } : Props) => {
                 <Image
                 className='rounded-full'
                 src={project?.creator.image}
-                width={44}
-                height={44}
+                width={52}
+                height={52}
                 alt='Profile Image'
               />
               </Link>
@@ -63,7 +63,7 @@ const ProjectPage = ({ params } : Props) => {
                 <p className='text-sm'>{project?.creator.name} - <span className='text-[#9747ff] font-semibold'>{project?.category}</span></p>
               </div>
           </section>
-          <section className='flex flex-col gap-10'>
+          <section className='flex flex-col gap-8'>
             <div className='w-full lg:h-[65vh]'>
               <Image
                className='rounded-2xl w-full h-full object-cover'
@@ -95,7 +95,7 @@ const ProjectPage = ({ params } : Props) => {
           </section>
         </section>
 
-          <section className='w-full flex items-center gap-8 my-8'>
+          <section className='w-full flex items-center gap-8 my-16 md:my-24'>
                 <span className='w-full h-[2px] bg-gray-200'></span>
                 <Link 
                 className='flex items-center justify-center min-w-[82px] h-[82px]'
@@ -104,8 +104,8 @@ const ProjectPage = ({ params } : Props) => {
                   <Image
                   className='rounded-full'
                   src={project?.creator.image}
-                  width={60}
-                  height={60}
+                  width={90}
+                  height={90}
                   alt='Profile Image'
                 />
               </Link>
