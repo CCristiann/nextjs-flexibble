@@ -5,8 +5,7 @@
 # About the project
 Dribble clone
 
-👉 **Live Demo**: [Live Demo](https://flexibble.ccristiann.vercel.app/)
-
+👉 **Live Demo**: [Live Demo](https://flexibble.ccristiann.vercel.app)
 \
 **Build with:** \
 » Next JS \
