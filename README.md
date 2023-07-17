@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="/public/assets/images/purple-logo.svg">
+    <img src="/public/assets/images/logo-purple.svg">
 </div>
 
 # About the project
