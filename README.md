@@ -1,6 +1,5 @@
 <div align="center">
-    <img src="/public/assets/images/logo.svg">
-    <h1>Flexibble</h1>
+    <img src="/public/assets/images/purple-logo.svg">
 </div>
 
 # About the project
