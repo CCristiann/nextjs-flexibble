@@ -12,5 +12,5 @@ Dribble clone
 » Next JS \
 » React JS \
 » MongoDB \
-» Typescript \
+» TypeScript \
 » Tailwindcss 
