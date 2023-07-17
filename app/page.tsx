@@ -23,10 +23,8 @@ export default function Home() {
       const data = await response.json()
 
       if(response.ok){
-        setTimeout(() => {
           setIsLoading(false)
           setProjects(data)
-        }, 1000)
       }
     }
     fetchProjects()

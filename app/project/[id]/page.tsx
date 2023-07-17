@@ -11,9 +11,11 @@ import Link from 'next/link'
 
 import { BsGithub, BsFillRocketTakeoffFill } from 'react-icons/bs'
 
-import { projectProps } from '@/interfaces/interfaces'
+
 
 import ProjectPageSkeleton from '@/components/skeleton/ProjectPageSkeleton'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 type Props = {
     params: {
@@ -22,12 +24,18 @@ type Props = {
 }
 const ProjectPage = ({ params } : Props) => {
 
+
     const [isLoading, setIsLoading] = useState(true)
     const [project, setProject] = useState<any>()
 
+    const { data: session } : any = useSession()
+    const router = useRouter()
+    
     useEffect(() => {
         const getProjectDetails = async () => {
-            const response = await fetch(`/api/project/${params.id}`)
+            const response = await fetch(`/api/project/${params.id}`, {
+              method: 'GET'
+            })
             const data = await response.json()
 
             setIsLoading(false)
@@ -38,7 +46,30 @@ const ProjectPage = ({ params } : Props) => {
         getProjectDetails()
     }, [params.id])
 
+    const handleDelete = async () => {
 
+      const hasConfirmedDelete = confirm(
+        "Are you sure you want to delete this post?"
+      );
+
+      if(hasConfirmedDelete){
+        try{
+          await fetch(`/api/project/${params.id}`, {
+            method: "DELETE",
+            body: JSON.stringify(params)
+          });
+  
+          router.push('/')
+          
+          } catch (err) {
+          console.log(err)
+          }
+       }
+      }
+
+    const handleEdit = () => {
+
+    }
   return (
     <Modal>
         {isLoading ? (
@@ -46,22 +77,50 @@ const ProjectPage = ({ params } : Props) => {
         ) : (
           <>
           <section className='max-w-5xl w-full mx-auto flex flex-col gap-8'>
-          <section className='flex gap-4'>
-              <Link 
-              className='flex items-center justify-center'
-              href={`/profile/${project?.creator._id}`}>
-                <Image
-                className='rounded-full'
-                src={project?.creator.image}
-                width={52}
-                height={52}
-                alt='Profile Image'
-              />
-              </Link>
-              <div className='flex flex-col gap-1'>
-                <h3 className='font-semibold text-lg'>{project?.title}</h3>
-                <p className='text-sm'>{project?.creator.name} - <span className='text-[#9747ff] font-semibold'>{project?.category}</span></p>
+          <section className='flex flex-wrap justify-between items-center gap-y-8'>
+              <div className='flex gap-4'>
+                <Link 
+                className='flex items-center justify-center'
+                href={`/profile/${project?.creator._id}`}>
+                  <Image
+                  className='rounded-full'
+                  src={project?.creator.image}
+                  width={52}
+                  height={52}
+                  alt='Profile Image'
+                />
+                </Link>
+                <div className='flex flex-col gap-1'>
+                  <h3 className='font-semibold text-lg'>{project?.title}</h3>
+                  <p className='text-sm'>{project?.creator.name} - <span className='text-[#9747ff] font-semibold'>{project?.category}</span></p>
+                </div>
               </div>
+              {session?.user?.id === project?.creator._id && (
+                <div className='flex gap-4 w-full sm:w-fit justify-center'>
+                  <button
+                    onClick={handleEdit}
+                    className='edit_btn'
+                  >
+                    <Image 
+                    src='/assets/icons/pencile.svg'
+                    width={17}
+                    height={17}
+                    alt="pencil"
+                    />
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className='delete_btn'
+                  >
+                    <Image 
+                    src='/assets/icons/trash.svg'
+                    width={17}
+                    height={17}
+                    alt="trash"
+                    />
+                  </button>
+                </div>
+              )}
           </section>
           <section className='flex flex-col gap-8'>
             <div className='w-full lg:h-[65vh]'>

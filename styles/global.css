@@ -53,6 +53,13 @@ html{
     @apply rounded-xl bg-[#9747ff] px-4 py-3 text-white font-medium max-md:w-full text-sm
 }
 
+.delete_btn{
+    @apply rounded-md bg-[#9747ff] p-2
+}
+
+.edit_btn{
+    @apply rounded-md bg-blue-500 p-2
+}
 .form_btn{
     @apply flex gap-3 items-center rounded-lg px-4 py-3 text-white font-medium max-w-fit text-base
 }
@@ -89,7 +96,7 @@ html{
 }
 
 .projects-grid {
-    @apply grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full z-0;
+    @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full z-0;
   }
 
 .profile-card_title{

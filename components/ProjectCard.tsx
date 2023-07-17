@@ -20,18 +20,16 @@ const ProjectCard = ({ project } : any) => {
     <div className='flex flex-col gap-4'>
        <Link className='flex justify-center items-center relative w-full h-full' href={`/project/${project._id}`}>
          <Image 
-         className='w-full h-full object-cover rounded-xl'
+         className='w-full h-full object-cover rounded-2xl'
          src={project.image}
          width={414}
          height={314}
          alt={project.title}
        />
-        <div className='flex profile-card_title'>
-          <p className='w-full'>{project.title}</p>
-        </div>
+        
        </Link>
        <div className='flex justify-between items-center'>
-         <div className='flex gap-4 items-center'>
+         <div className='flex gap-2 items-center'>
            <Link href={`/profile/${project.creator._id}`}>
              <Image
              className='rounded-full '
@@ -41,7 +39,7 @@ const ProjectCard = ({ project } : any) => {
              alt='User Image'
              />
            </Link>
-           <h4 className='font-semibold text-sm md:text-base'>{project.creator.name}</h4>  
+           <h4 className='font-semibold text-sm'>{project.creator.name}</h4>  
          </div>
          <div className='flex gap-4'>
             <div className='flex gap-2'>
@@ -51,7 +49,7 @@ const ProjectCard = ({ project } : any) => {
               height={14}
               alt='Heart icon'
               />
-              <p className='text-sm'>{randomLikes}</p>
+              <p className='text-sm font-semibold'>{randomLikes}</p>
             </div>
 
             <div className='flex gap-2'>
@@ -61,7 +59,7 @@ const ProjectCard = ({ project } : any) => {
               height={14}
               alt='Eye icon'
               />
-              <p className='text-sm'>{randomViews}</p>
+              <p className='text-sm font-semibold'>{randomViews}</p>
             </div>
          </div>
        </div>
