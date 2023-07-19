@@ -1,5 +1,7 @@
 import mongoose, { ConnectOptions } from "mongoose";
 
+const url = process.env.MONGODB_URI?.toString()
+
 let isConnected = false;
 
 export const connectToDB = async () => {
@@ -12,7 +14,7 @@ export const connectToDB = async () => {
 
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI as string,
+      url as string,
       {
         dbName: "flexibble",
         useNewUrlParser: true,
