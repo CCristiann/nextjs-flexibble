@@ -22,7 +22,7 @@ export default function Home() {
       const data = await response.json();
 
       setProjects(data);
-      
+      console.log(projects)
       setTimeout(() => {
         setIsLoading(false)
       }, 500)

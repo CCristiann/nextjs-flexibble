@@ -34,7 +34,6 @@ const ProjectForm = ({ type, session }: any) => {
     formState.image = image;
 
     try {
-      console.log(formState);
       const response = await fetch("/api/project/new", {
         method: "POST",
         body: JSON.stringify(formState),
