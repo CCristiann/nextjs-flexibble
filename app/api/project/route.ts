@@ -1,7 +1,7 @@
 import Project from "@/models/project";
 import { connectToDB } from "@/utils/database";
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     await connectToDB();
 

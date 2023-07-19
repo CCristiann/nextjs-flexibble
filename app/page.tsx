@@ -21,14 +21,14 @@ export default function Home() {
       const response = await fetch("/api/project");
       const data = await response.json();
 
-      setProjects(data);
-      console.log(projects)
+      setProjects(data) //To fix => projects going undefined at the render of the page
+      
       setTimeout(() => {
         setIsLoading(false)
       }, 500)
     };
     fetchProjects();
-  }, []);
+  }, [projects]);
 
   return (
     <section>

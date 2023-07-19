@@ -7,11 +7,11 @@ type Props = {
   };
 };
 
-export async function GET(req: Request, { params }: Props) {
+export async function GET({ params }: Props) {
   try {
     await connectToDB();
 
-    const project = await Project.findById(params.id).populate("creator");
+    const project = await Project.findById(params.id);
 
     if (!project) return new Response("Project not found", { status: 404 });
 
@@ -21,14 +21,14 @@ export async function GET(req: Request, { params }: Props) {
   }
 }
 
-export async function DELETE(req: Request, { params }: Props) {
+export async function DELETE({ params }: Props) {
   try {
     await connectToDB();
 
     const existingProject = await Project.findByIdAndRemove(params.id);
 
-    if (!existingProject)
-      return new Response("Project not found.", { status: 404 });
+    if (!existingProject) return new Response("Project not found.", { status: 404 });
+    
   } catch {
     return new Response("Failed to fetch the project", { status: 500 });
   }
