@@ -55,7 +55,7 @@ const Providers = () => {
                   onClick={() =>
                     signIn(provider.id, {
                       callbackUrl:
-                        "https://nextjs-flexibble-ccristiann.vercel.app",
+                        "https://flexibble-ccristiann.vercel.app",
                     })
                   }
                 >
