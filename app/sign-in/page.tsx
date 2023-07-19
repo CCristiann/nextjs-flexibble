@@ -1,10 +1,8 @@
-import Providers from '@/components/Providers'
-import React from 'react'
+import Providers from "@/components/Providers";
+import React from "react";
 
 const SignInPage = () => {
-  return (
-    <Providers />
-  )
-}
+  return <Providers />;
+};
 
-export default SignInPage
+export default SignInPage;

@@ -1,24 +1,21 @@
 import { connectToDB } from "@/utils/database";
 import RelatedProjects from "@/components/RelatedProjects";
 import User from "@/models/user";
+import Project from "@/models/project";
 
 type Props = {
-    params: {
-        id: string
-    }
-}
-export async function GET (req: Request, { params } : Props) {
+  params: {
+    id: string;
+  };
+};
+export async function GET(req: Request, { params }: Props) {
+  try {
+    await connectToDB();
 
-    try{
-        await connectToDB()
-        
-        const existingUser = await User.findById(params.id)
+    const relatedProjects = await Project.find({"creator" : params.id})
 
-        const relatedProjects = existingUser.projects
-
-
-        return new Response(JSON.stringify(relatedProjects), { status: 200 })
-    } catch {
-        return new Response('Failed to fetch related projects',{ status: 500 })
-    }
+    return new Response(JSON.stringify(relatedProjects), { status: 200 });
+  } catch {
+    return new Response("Failed to fetch related projects", { status: 500 });
+  }
 }

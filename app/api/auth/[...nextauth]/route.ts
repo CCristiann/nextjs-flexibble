@@ -10,8 +10,8 @@ import { Session } from "next-auth";
 const handler = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -19,39 +19,39 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session ({ session } : any){
+    async session({ session }: any) {
       const sessionUser = await User.findOne({
-        email: session.user.email
+        email: session.user.email,
       });
 
       session.user.id = sessionUser._id.toString();
 
-      return session
+      return session;
     },
 
     async signIn({ user }) {
-        try{
-            await connectToDB()
+      try {
+        await connectToDB();
 
-            const userExists = await User.findOne({
-              email: user.email
-            })
+        const userExists = await User.findOne({
+          email: user.email,
+        });
 
-            if (!userExists) {
-              await User.create({
-                email: user.email,
-                username: user.name,
-                image: user.image
-              });
-            }
-
-            return true
-        } catch (err: any) {
-            console.log(err)
-            return false
+        if (!userExists) {
+          await User.create({
+            email: user.email,
+            username: user.name,
+            image: user.image,
+          });
         }
+
+        return true;
+      } catch (err: any) {
+        console.log(err);
+        return false;
+      }
     },
-  }
+  },
 });
 
 export { handler as GET, handler as POST };

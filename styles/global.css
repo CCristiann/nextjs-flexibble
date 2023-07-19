@@ -6,103 +6,103 @@
   width: 5px;
   height: 4px;
 }
-  
+
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 12px;
 }
 
 .black_gradient {
-    @apply bg-gradient-to-t from-black/40 via-black/20  to-black/5;
+  @apply bg-gradient-to-t from-black/40 via-black/20  to-black/5;
 }
 
-html{
-    @apply overflow-x-hidden
+html {
+  @apply overflow-x-hidden;
 }
 
-.not-scrollable{
-    @apply overflow-y-hidden
+.not-scrollable {
+  @apply overflow-y-hidden;
 }
-.app{
-    @apply min-h-screen 
+.app {
+  @apply min-h-screen;
 }
-.paddings{
-    @apply lg:px-20 py-6 px-5
-}
-
-.navbar{
-    @apply flex justify-between items-center py-5 px-8 border-b-[1px] gap-4 paddings text-sm 
+.paddings {
+  @apply lg:px-20 py-6 px-5;
 }
 
-.footer{
-    @apply flex justify-start flex-col paddings w-screen gap-20 bg-gray-100
-}
-.sign-in_btn{
-    @apply flex gap-2 items-center justify-center rounded-lg bg-[#9747ff] px-4 py-2 text-white font-medium max-md:w-full text-sm
+.navbar {
+  @apply flex justify-between items-center py-5 px-8 border-b-[1px] gap-4 paddings text-sm;
 }
 
-.sign-in_btn_provider{
-    @apply flex gap-2 items-center justify-center rounded-xl bg-white py-2 text-black border-2  outline-2 outline-black border-black font-medium max-md:w-full text-sm
+.footer {
+  @apply flex justify-start flex-col paddings w-screen gap-20 bg-gray-100;
+}
+.sign-in_btn {
+  @apply flex gap-2 items-center justify-center rounded-lg bg-[#9747ff] px-4 py-2 text-white font-medium max-md:w-full text-sm;
 }
 
-.sign-out_btn{
-    @apply rounded-lg bg-[#9747ff] px-3 py-2 text-white font-medium max-md:w-full text-sm
+.sign-in_btn_provider {
+  @apply flex gap-2 items-center justify-center rounded-xl bg-white py-2 text-black border-2  outline-2 outline-black border-black font-medium max-md:w-full text-sm;
 }
 
-.share-work_btn{
-    @apply rounded-xl bg-[#9747ff] px-4 py-3 text-white font-medium max-md:w-full text-sm
+.sign-out_btn {
+  @apply rounded-lg bg-[#9747ff] px-3 py-2 text-white font-medium max-md:w-full text-sm;
 }
 
-.delete_btn{
-    @apply rounded-md bg-[#9747ff] p-2
+.share-work_btn {
+  @apply rounded-xl bg-[#9747ff] px-4 py-3 text-white font-medium max-md:w-full text-sm;
 }
 
-.edit_btn{
-    @apply rounded-md bg-blue-500 p-2
-}
-.form_btn{
-    @apply flex gap-3 items-center rounded-lg px-4 py-3 text-white font-medium max-w-fit text-base
+.delete_btn {
+  @apply rounded-md bg-[#9747ff] p-2;
 }
 
-.modal_overlay{
-    @apply fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/80;
+.edit_btn {
+  @apply rounded-md bg-blue-500 p-2;
+}
+.form_btn {
+  @apply flex gap-3 items-center rounded-lg px-4 py-3 text-white font-medium max-w-fit text-base;
 }
 
-.modal_wrapper{
-    @apply flex justify-start items-center flex-col absolute  h-[95%] w-full bottom-0 bg-white rounded-t-3xl lg:px-40 px-8 pt-14 pb-72 overflow-y-auto overflow-x-hidden
+.modal_overlay {
+  @apply fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/80;
 }
 
-.project_form{
-    @apply flex flex-col w-full lg:pt-24 pt-12 gap-12 text-lg max-w-5xl mx-auto
+.modal_wrapper {
+  @apply flex justify-start items-center flex-col absolute  h-[95%] w-full bottom-0 bg-white rounded-t-3xl lg:px-40 px-8 pt-14 pb-72 overflow-y-auto overflow-x-hidden;
 }
 
-.form_image-container{
-    @apply w-full lg:min-h-[400px] min-h-[200px] relative border-2 border-gray-300 border-dashed flex items-center justify-center
+.project_form {
+  @apply flex flex-col w-full lg:pt-24 pt-12 gap-12 text-lg max-w-5xl mx-auto;
 }
 
-.form_image-container > img{
-    @apply rounded-md
+.form_image-container {
+  @apply w-full lg:min-h-[400px] min-h-[200px] relative border-2 border-gray-300 border-dashed flex items-center justify-center;
+}
+
+.form_image-container > img {
+  @apply rounded-md;
 }
 .form_image-label {
-    @apply z-10 absolute h-full w-full flex items-center justify-center text-lg text-gray-800
+  @apply z-10 absolute h-full w-full flex items-center justify-center text-lg text-gray-800;
 }
 
-.form_file-input{
-    @apply absolute z-30 w-full opacity-0 h-full cursor-pointer
+.form_file-input {
+  @apply absolute z-30 w-full opacity-0 h-full cursor-pointer;
 }
 
-.form_field-input{
-    @apply w-full outline-0 bg-neutral-100 rounded-xl p-4 text-base
+.form_field-input {
+  @apply w-full outline-0 bg-neutral-100 rounded-xl p-4 text-base;
 }
 
 .projects-grid {
-    @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full z-0;
-  }
+  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full z-0;
+}
 
-.profile-card_title{
-    @apply justify-end items-end w-full h-1/3 bg-gradient-to-b from-transparent to-black/50 rounded-b-2xl gap-2 absolute bottom-0 right-0 font-semibold text-lg text-white p-4
+.profile-card_title {
+  @apply justify-end items-end w-full h-1/3 bg-gradient-to-b from-transparent to-black/50 rounded-b-2xl gap-2 absolute bottom-0 right-0 font-semibold text-lg text-white p-4;
 }
 
 .footer-grid {
-    @apply grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 lg:gap-0 w-full
+  @apply grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 lg:gap-0 w-full;
 }

@@ -3,6 +3,7 @@
 </div>
 
 # About the project
+
 Dribble clone
 
 👉 **Live Demo**: [Live Demo](https://flexibble-ccristiann.vercel.app)
@@ -12,4 +13,4 @@ Dribble clone
 » React JS \
 » MongoDB \
 » TypeScript \
-» Tailwindcss 
+» Tailwindcss

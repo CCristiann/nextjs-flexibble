@@ -1,4 +1,5 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
+import { ProjectSchema } from "./project";
 
 const UserSchema = new Schema({
   email: {
@@ -8,18 +9,23 @@ const UserSchema = new Schema({
   },
   username: {
     type: String,
-    required: [true, "Username is required."]
+    required: [true, "Username is required."],
   },
   image: {
     type: String,
   },
-  githubUrl:{
+  githubUrl: {
     type: String,
   },
   linkedInUrl: {
-    type: String
+    type: String,
   },
-  projects: []
+  projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
 });
 
 const User = models.User || model("User", UserSchema);
