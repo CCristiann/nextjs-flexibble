@@ -35,11 +35,15 @@ export default function Home() {
           ))}
         </div>
       ) : (
+        <>
+        {projects && (
         <div className="projects-grid">
           {projects.map((project: any, i: number) => (
             <ProjectCard key={i} project={project} />
           ))}
         </div>
+        )}
+        </>
       )}
     </section>
   );

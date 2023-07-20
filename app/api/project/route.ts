@@ -4,7 +4,7 @@ import { connectToDB } from "@/utils/database";
 export async function GET() {
   try {
     await connectToDB();
-
+            
     const allProjects = await Project.find({});
 
     return new Response(JSON.stringify(allProjects), { status: 200 });

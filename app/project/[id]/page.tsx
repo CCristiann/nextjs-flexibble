@@ -14,13 +14,14 @@ import { BsGithub, BsFillRocketTakeoffFill } from "react-icons/bs";
 import ProjectPageSkeleton from "@/components/skeleton/ProjectPageSkeleton";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { deleteProject, getProjectDetails, updateUserProjects, getUserDetails } from "@/utils/actions";
+import { deleteProject, getProjectDetails, updateUserProjects } from "@/utils/actions";
 
 type Props = {
   params: {
     id: string;
   };
 };
+
 const ProjectPage = ({ params }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
 

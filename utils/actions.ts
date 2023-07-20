@@ -2,7 +2,6 @@ export const getAllProjects = async() => {
   const response = await fetch('/api/project', {
     method: "GET"
   })
-  console.log(response)
   const data = await response.json()
 
   return data
