@@ -23,7 +23,7 @@ export async function GET(req: Request, { params }: Props) {
   }
 }
 
-export async function DELETE({ params }: Props) {
+export async function DELETE(req: Request, { params } : Props) {
   try {
     await connectToDB();
 
