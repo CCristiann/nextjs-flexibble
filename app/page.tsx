@@ -17,6 +17,7 @@ export default function Home() {
       const response = await fetch("/api/project");
       const data = await response.json();
 
+      console.log(data)
       setProjects(data)
       
       setTimeout(() => {
@@ -24,7 +25,7 @@ export default function Home() {
       }, 500)
     };
     fetchProjects();
-  }, [projects]);
+  }, []);
 
   return (
     <section>
