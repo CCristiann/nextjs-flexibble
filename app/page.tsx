@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import ProjectCardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
+import { getAllProjects } from "@/utils/actions";
 
 export default function Home() {
   const [projects, setProjects] = useState<any>();
@@ -14,11 +15,9 @@ export default function Home() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const response = await fetch("/api/project");
-      const data = await response.json();
+      const data = await getAllProjects()
 
-      console.log(data)
-      setProjects(data)
+      if(data.length !== 0) setProjects(data)
       
       setTimeout(() => {
         setIsLoading(false)
