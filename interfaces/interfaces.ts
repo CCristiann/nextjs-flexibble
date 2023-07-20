@@ -7,6 +7,16 @@ export interface Session {
   };
 }
 
+export interface userProps {
+  user: {
+    _id: string
+    username: string
+    image: string
+    email: string
+    projects: Array<string>
+  }
+}
+
 export interface formProps {
   title: string;
   description: string;

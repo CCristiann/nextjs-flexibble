@@ -1,13 +1,9 @@
 "use client";
-import { connectToDB } from "@/utils/database";
 import React, { useEffect, useState } from "react";
 
 import ProjectCard from "@/components/ProjectCard";
 
-import Image from "next/image";
-
 import "react-loading-skeleton/dist/skeleton.css";
-import CardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
 import ProjectCardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
 
 export default function Home() {
@@ -21,7 +17,7 @@ export default function Home() {
       const response = await fetch("/api/project");
       const data = await response.json();
 
-      setProjects(data) //To fix => projects going undefined at the render of the page
+      setProjects(data)
       
       setTimeout(() => {
         setIsLoading(false)

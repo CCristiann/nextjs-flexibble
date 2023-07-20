@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { getUserDetails } from '@/utils/actions'
 
 const ProjectCard = ({ project } : any) => {
-
+  
     const [randomLikes, setRandomLikes] = useState(0)
     const [randomViews, setRandomViews] = useState('')
     

@@ -14,7 +14,7 @@ import { BsGithub, BsFillRocketTakeoffFill } from "react-icons/bs";
 import ProjectPageSkeleton from "@/components/skeleton/ProjectPageSkeleton";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { deleteProject, getProjectDetails, updateUserProjects } from "@/utils/actions";
+import { deleteProject, getProjectDetails, updateUserProjects, getUserDetails } from "@/utils/actions";
 
 type Props = {
   params: {
@@ -23,16 +23,20 @@ type Props = {
 };
 const ProjectPage = ({ params }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [project, setProject] = useState<any>();
 
-  const { data: session }: any = useSession();
+  const [project, setProject] = useState<any>();
+  const [user, setUser] = useState<any>();
+
+  const { data: session } : any = useSession();
+
   const router = useRouter();
 
   useEffect(() => {
     const getProject = async () => {
       const data = await getProjectDetails(params.id);
-
-      setProject(data);
+ 
+      setProject(data.project);
+      setUser(data.user[0])
       
       setTimeout(() => {
         setIsLoading(false)
@@ -42,6 +46,7 @@ const ProjectPage = ({ params }: Props) => {
 
     getProject();
   }, [params.id]);
+
 
   const handleDelete = async () => {
     const hasConfirmedDelete = confirm(
@@ -61,6 +66,7 @@ const ProjectPage = ({ params }: Props) => {
   };
 
   const handleEdit = () => {};
+
   return (
     <Modal>
       {isLoading ? (
@@ -72,27 +78,27 @@ const ProjectPage = ({ params }: Props) => {
               <div className="flex gap-4">
                 <Link
                   className="flex items-center justify-center"
-                  href={`/profile/${project?.creator._id}`}
+                  href={`/profile/${user._id}`}
                 >
                   <Image
                     className="rounded-full"
-                    src={project?.creator.image}
+                    src={user.image}
                     width={52}
                     height={52}
                     alt="Profile Image"
                   />
                 </Link>
                 <div className="flex flex-col gap-1">
-                  <h3 className="font-semibold text-lg">{project?.title}</h3>
+                  <h3 className="font-semibold text-lg">{project.title}</h3>
                   <p className="text-sm">
-                    {project?.creator.name} -{" "}
+                    {user.username} -{" "}
                     <span className="text-[#9747ff] font-semibold">
-                      {project?.category}
+                      {project.category}
                     </span>
                   </p>
                 </div>
               </div>
-              {session?.user?.id === project?.creator._id && (
+              {session?.user?.id === project.creator && (
                 <div className="flex gap-4 w-full sm:w-fit justify-center">
                   <button onClick={handleEdit} className="edit_btn">
                     <Image
@@ -117,13 +123,13 @@ const ProjectPage = ({ params }: Props) => {
               <div className="w-full lg:h-[65vh]">
                 <Image
                   className="rounded-2xl w-full h-full object-cover"
-                  src={project?.image}
+                  src={project.image}
                   width={500}
                   height={500}
                   alt="Project Image"
                 />
               </div>
-              <p>{project?.description}</p>
+              <p>{project.description}</p>
 
               <div className="flex gap-5 w-full justify-center">
                 <Link
@@ -149,11 +155,11 @@ const ProjectPage = ({ params }: Props) => {
             <span className="w-full h-[2px] bg-gray-200"></span>
             <Link
               className="flex items-center justify-center min-w-[82px] h-[82px]"
-              href={`/profile/${project?.creator._id}`}
+              href={`/profile/${project.creator}`}
             >
               <Image
                 className="rounded-full"
-                src={project?.creator.image}
+                src={user.image}
                 width={90}
                 height={90}
                 alt="Profile Image"
@@ -165,17 +171,17 @@ const ProjectPage = ({ params }: Props) => {
           <section className="w-full">
             <div className="w-full flex justify-between">
               <h4 className="font-semibold text-base">
-                More by {project?.creator.name}
+                More by {user.username}
               </h4>
               <Link
                 className="text-[#9747ff] text-base font-semibold"
-                href={`/profile/${project?.creator._id}`}
+                href={`/profile/${project.creator}`}
               >
                 View All
               </Link>
             </div>
 
-            <RelatedProjects params={params} />
+            <RelatedProjects user={user}/>
           </section>
         </>
       )}

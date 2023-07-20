@@ -1,48 +1,39 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { projectProps } from "@/interfaces/interfaces";
 
 import ProjectCard from "./ProjectCard";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+import { getRelatedProjects } from "@/utils/actions";
+import { StringExpression } from "mongoose";
 
-const RelatedProjects = ({ params }: Props) => {
-  const [projects, setProjects] = useState([]);
+import { userProps } from "@/interfaces/interfaces";
+
+const RelatedProjects = ({ user } : userProps) => {
+
+  const [projects, setProjects] = useState<any>()
 
   useEffect(() => {
-    const getRelatedProjects = async () => {
-      const projectResponse = await fetch(`/api/project/${params.id}`);
-      const project = await projectResponse.json();
+    const getProjects = async () => {
+      const data = await getRelatedProjects(user._id);
 
-      const response = await fetch(
-        `/api/users/${project.creator._id}/projects`
-      );
-      const data = await response.json();
-
-      const filteredRelatedProjects = data.filter(
-        (p: any) => p._id !== project._id
-      );
-      setProjects(filteredRelatedProjects);
+      if(data.length !== 0) setProjects(data)
     };
 
-    getRelatedProjects();
-  }, [params.id]);
+    getProjects();
+  }, [user._id]);
 
-  if (projects) {
-    return (
+  return (
+    <>
+    {projects && (
       <div className="projects-grid">
-        {projects.map((relatedProject, i) => (
+        {projects.map((relatedProject : any, i : number) => (
           <ProjectCard key={i} project={relatedProject} />
         ))}
       </div>
-    );
-  }
+    )}
+    </>
+  );
 };
 
 export default RelatedProjects;

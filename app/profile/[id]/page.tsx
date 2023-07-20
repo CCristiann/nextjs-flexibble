@@ -8,6 +8,7 @@ import Image from "next/image";
 import ProfilePageSkeleton from "@/components/skeleton/ProfilePageSkeleton";
 import ProjectCard from "@/components/ProjectCard";
 import { getRelatedProjects, getUserDetails } from "@/utils/actions";
+import RelatedProjects from "@/components/RelatedProjects";
 
 type Props = {
   params: {
@@ -26,22 +27,24 @@ const ProfilePage = ({ params }: Props) => {
     const getUser = async () => {
       const data = await getUserDetails(params.id);
       setUser(data);
+
       setTimeout(() => {
         setIsLoading(false)
       }, 500)
-    };
+    }
+
     getUser();
   }, [params.id]);  
 
   useEffect(() => {
     const getProjects = async () => {
-      const data = await getRelatedProjects(params.id);
+      const data = await getRelatedProjects(params.id)
 
-      if(data.length !== 0) setProjects(data)
-    };
+      setProjects(data)
+    }
 
-    getProjects();
-  }, [params.id]);
+    getProjects()
+  }, [params.id])
 
   return (
     <section className="w-full flex flex-col gap-16 paddings mb-20">
@@ -84,16 +87,12 @@ const ProfilePage = ({ params }: Props) => {
           </div>  
         )}
       </div>
-
-      {projects && (
-        <section>
+      <section>
           <h4 className="font-semibold text-lg">Recent Work</h4>
-          <div className="projects-grid">
-            {projects.map((relatedProject: any, i: number) => (
-              <ProjectCard key={i} project={relatedProject} />
-            ))}
-          </div>
+          <RelatedProjects user={user}/>
         </section>
+      {projects && (
+        <></>
       )}
       </>
       )}

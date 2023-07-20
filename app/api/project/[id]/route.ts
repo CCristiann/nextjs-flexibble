@@ -1,4 +1,5 @@
 import Project from "@/models/project";
+import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 
 type Props = {
@@ -7,15 +8,16 @@ type Props = {
   };
 };
 
-export async function GET({ params }: Props) {
+export async function GET(req: Request, { params }: Props) {
   try {
     await connectToDB();
 
     const project = await Project.findById(params.id);
+    const user = await User.find({"projects" : params.id})
 
     if (!project) return new Response("Project not found", { status: 404 });
 
-    return new Response(JSON.stringify(project), { status: 200 });
+    return new Response(JSON.stringify({"project": project, "user": user}), { status: 200 });
   } catch {
     return new Response("Failed to fetch the project", { status: 500 });
   }

@@ -7,6 +7,9 @@ const nextConfig = {
       "res.cloudinary.com",
     ],
   },
+  experimental: {
+    serverComponentsExternalPackages: ['cloudinary']
+  }
 };
 
 module.exports = nextConfig;

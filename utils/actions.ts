@@ -21,7 +21,9 @@ export const getUserDetails = async (id: string) => {
 };
 
 export const getRelatedProjects = async (id: string) => {
-  const response = await fetch(`/api/users/${id}/projects`);
+  const response = await fetch(`/api/users/${id}/projects`, {
+    method: "GET"
+  });
   const data = await response.json();
 
   return data;

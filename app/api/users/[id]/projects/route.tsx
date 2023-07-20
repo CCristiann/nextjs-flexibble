@@ -1,5 +1,4 @@
 import { connectToDB } from "@/utils/database";
-import RelatedProjects from "@/components/RelatedProjects";
 import User from "@/models/user";
 import Project from "@/models/project";
 
