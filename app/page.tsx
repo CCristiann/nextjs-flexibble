@@ -19,9 +19,7 @@ export default function Home() {
 
       if(data.length !== 0) setProjects(data)
       
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 500)
+      setIsLoading(false)
     };
     fetchProjects();
   }, []);
