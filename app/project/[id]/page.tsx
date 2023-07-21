@@ -57,7 +57,7 @@ const ProjectPage = ({ params }: Props) => {
     if (hasConfirmedDelete) {
       try {
         await deleteProject(params.id);
-        await updateUserProjects(project.creator._id, params.id)
+        await updateUserProjects(project.creator, params.id)
 
         router.push("/");
       } catch (err) {

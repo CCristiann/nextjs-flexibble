@@ -55,7 +55,7 @@ const Providers = () => {
                   onClick={() =>
                     signIn(provider.id, {
                       callbackUrl:
-                        "https://flexibble-ccristiann.vercel.app",
+                        "http://localhost:3000",
                     })
                   }
                 >

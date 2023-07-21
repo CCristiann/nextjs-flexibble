@@ -75,7 +75,7 @@ const ProfilePage = ({ params }: Props) => {
             </button>
           </div>
         </div>
-        {projects && (
+        {projects.length !== 0 && (
           <div>
             <Image
               className="object-contain rounded-xl"
@@ -87,12 +87,13 @@ const ProfilePage = ({ params }: Props) => {
           </div>  
         )}
       </div>
-      <section>
+      {projects.length !== 0 && (
+        <>
+        <section>
           <h4 className="font-semibold text-lg">Recent Work</h4>
           <RelatedProjects user={user}/>
         </section>
-      {projects && (
-        <></>
+        </>
       )}
       </>
       )}

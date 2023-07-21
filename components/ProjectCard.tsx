@@ -22,7 +22,7 @@ const ProjectCard = ({ project } : any) => {
     useEffect(() => {
       const getUser = async () => {
         const data = await getUserDetails(project.creator)
-        console.log(data)
+
         setUser(data)
       }
       getUser()

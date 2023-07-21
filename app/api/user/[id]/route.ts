@@ -1,6 +1,6 @@
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
-import { test } from "node:test";
+import { NextResponse } from "next/server";
 
 type Props = {
   params: {
@@ -14,16 +14,15 @@ export async function GET(req: Request, { params }: Props) {
 
     const user = await User.findById(params.id);
 
-    if (!user) return new Response("User not found", { status: 404 });
+    if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
 
-    return new Response(JSON.stringify(user), { status: 200 });
+    return NextResponse.json(user)
   } catch {
-    return new Response("Failed to fetch user data", { status: 500 });
+    return NextResponse.json({ message: "Failed to fetch user data" }, { status: 500 });
   }
 }
 
 export async function PATCH(req: Request, { params } : Props){
-  
   const projectId = await req.json()
 
   try {
@@ -34,6 +33,6 @@ export async function PATCH(req: Request, { params } : Props){
     });
 
   } catch {
-    return new Response("Failed to fetch user data", { status: 500 });
+    return NextResponse.json({ message: "Failed to update user data" }, { status: 500 });
   }
 }

@@ -1,3 +1,4 @@
+
 export const getAllProjects = async() => {
   const response = await fetch('/api/project', {
     method: "GET"
@@ -10,7 +11,7 @@ export const uploadImage = async (imagePath: string) => {
   try {
     const response = await fetch("/api/upload", {
       method: "POST",
-      body: JSON.stringify({ path: imagePath }),
+      body: JSON.stringify({ path: imagePath })
     });
 
     return response.json();
@@ -40,6 +41,7 @@ export const getRelatedProjects = async (id: string) => {
 export const getProjectDetails = async (id: string) => {
   const response = await fetch(`/api/project/${id}`, {
     method: "GET",
+
   });
   const data = await response.json();
 
@@ -49,10 +51,14 @@ export const getProjectDetails = async (id: string) => {
 export const deleteProject = async (id : string) => {
   await fetch(`/api/project/${id}`, {
     method: "DELETE",
+    headers: {
+      key: 'x-custom-header',
+      value: 'test'
+    } 
   });
 };
 
-export const updateUserProjects = async (userId : string, projectId : string ) => { //TO MODIFY
+export const updateUserProjects = async (userId : string, projectId : string ) => {
   await fetch(`/api/user/${userId}`, {
     method: "PATCH",
     body: JSON.stringify(projectId)

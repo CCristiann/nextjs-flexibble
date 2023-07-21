@@ -1,6 +1,7 @@
 import Project from "@/models/project";
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { title, description, image, liveSiteUrl, githubUrl, category, user } =
@@ -25,8 +26,8 @@ export async function POST(req: Request) {
 
     await newProject.save();
 
-    return new Response(JSON.stringify(newProject), { status: 200 });
+    return NextResponse.json(newProject, { status: 200 });
   } catch (err) {
-    return new Response("Failed to create new project", { status: 500 });
+    return NextResponse.json({ message: "Failed to create new project" }, { status: 500 });
   }
 }
