@@ -27,12 +27,12 @@ export const updateProject = async(formState: formProps, id : string) => {
 }
  
 export const getAllProjects = async() => {
-  const response = await fetch('/api/project', {
-    method: "GET"
-  })
-  const data = await response.json()
-
-  return data
+    const response = await fetch('/api/project', {
+      method: "GET"
+    })
+    const data = await response.json()
+  
+    return data
 }
 
 export const uploadImage = async (imagePath: string) => {

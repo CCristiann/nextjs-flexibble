@@ -2,7 +2,8 @@ import Project from "@/models/project";
 import { connectToDB } from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
+export async function GET(req: Request, category : string | undefined) {
+  console.log(category)
   try {
     await connectToDB();
             

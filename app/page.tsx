@@ -6,29 +6,47 @@ import ProjectCard from "@/components/ProjectCard";
 import "react-loading-skeleton/dist/skeleton.css";
 import ProjectCardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
 import { getAllProjects } from "@/utils/actions";
+import Categories from "@/components/Categories";
 
-export default function Home() {
+type SearchParamsProps = {
+  category?: string
+}
+
+type Props = {
+  searchParams: SearchParamsProps
+}
+export default function Home({ searchParams: { category }} : Props) {
   const [projects, setProjects] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isFiltering, setIsFiltering] = useState(false)
 
   const loadingArray = ["", "", "", "", "", "", "", ""];
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setIsFiltering(false)
       const data = await getAllProjects()
 
-      if(data.length !== 0) setProjects(data)
-      
+      if(data.length !== 0) {
+        if(category){
+          const filteredProjects = data.filter((p : any) => p.category === category)
+          setIsFiltering(true)
+          setProjects(filteredProjects)
+        }
+
+        if(!category) setProjects(data)
+      }
     };
     fetchProjects();
 
     setTimeout(() => {
       setIsLoading(false)
     }, 700)
-  }, []);
+  }, [category]);
 
   return (
     <section>
+      <Categories />
       {isLoading ? (
         <div className="projects-grid">
           {loadingArray.map((item, i) => (
@@ -37,12 +55,30 @@ export default function Home() {
         </div>
       ) : (
         <>
-        {projects && (
-        <div className="projects-grid">
-          {projects.map((project: any, i: number) => (
-            <ProjectCard key={i} project={project} />
-          ))}
-        </div>
+        {projects.length !== 0 ? (
+          <>
+          {isFiltering && (
+            <p 
+            className="mt-10 font-medium"
+            >
+              Results on: 
+              <span
+              className="text-[#9747ff] font-semibold"
+              >
+                &nbsp;{category}
+              </span>
+            </p>
+          )}
+          <div className="projects-grid">
+            {projects.map((project: any, i: number) => (
+              <ProjectCard key={i} project={project} />
+            ))}
+          </div>
+          </>
+        ) : (
+          <div className="max-w-fit w-full mx-auto h-full">
+            <h4 className="font-semibold text-md md:text-xl mt-64 w-full text-center">No projects found, go create some first!</h4>
+          </div>
         )}
         </>
       )}
