@@ -66,7 +66,9 @@ const ProjectPage = ({ params }: Props) => {
     }
   };
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    router.push(`/edit-project/${project._id}`)
+  };
 
   return (
     <Modal>
@@ -91,12 +93,23 @@ const ProjectPage = ({ params }: Props) => {
                 </Link>
                 <div className="flex flex-col gap-1">
                   <h3 className="font-semibold text-lg">{project.title}</h3>
-                  <p className="text-sm">
-                    {user.username} -{" "}
-                    <span className="text-[#9747ff] font-semibold">
+                  <div className="flex gap-3 items-center">
+                    <p className="text-sm">
+                      {user.username}
+                    </p>
+                    <Image
+                    src='/assets/icons/dot.svg'
+                    width={7}
+                    height={7}
+                    alt="Dot"
+                    />
+                    <Link
+                     href={`/`}
+                     className="text-[#9747ff] font-semibold"
+                     >
                       {project.category}
-                    </span>
-                  </p>
+                    </Link>
+                  </div>
                 </div>
               </div>
               {session?.user?.id === project.creator && (

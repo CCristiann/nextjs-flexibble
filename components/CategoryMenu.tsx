@@ -4,25 +4,30 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 
+
 type Props = {
   title: string;
   filters: Array<string>;
-  categoryState: string;
-  setCategoryState: (value: string) => void;
+  state: string;
+  onChange: (value: string) => void;
+  dispatch: ({ type, KEY, value } : any) => void;
+  KEY: string;
 };
 
 const CategoryMenu = ({
   title,
   filters,
-  categoryState,
-  setCategoryState,
+  state,
+  onChange,
+  dispatch,
+  KEY
 }: Props) => (
   <div className="flex items-start justify-start flex-col w-full gap-7 relative">
     <Menu as="div" className="self-start relative">
       <div className="flex flex-col gap-4 items-start">
         <label className="font-semibold text-lg">Category</label>
         <Menu.Button className="flex items-center gap-4 w-full rounded-md bg-gray-100 p-4 text-base outline-none capitalize">
-          {categoryState || "Category"}
+          {state || "Category"}
           <Image
             src="/assets/icons/arrow-down.svg"
             width={13}
@@ -47,7 +52,11 @@ const CategoryMenu = ({
                 type="button"
                 value={tag}
                 className="text-left w-full px-5 py-2 text-sm hover:bg-light-white-100 self-start whitespace-nowrap capitalize"
-                onClick={(e) => setCategoryState(e.currentTarget.value)}
+                onClick={(e) => dispatch({
+                  type: 'UPDATE_CATEGORY',
+                  KEY: KEY,
+                  value: e.currentTarget.value
+                })}
               >
                 {tag}
               </button>

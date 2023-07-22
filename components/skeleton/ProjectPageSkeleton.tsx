@@ -15,14 +15,13 @@ const ProjectPageSkeleton = () => {
           </div>
         </section>
         <section className="flex flex-col gap-10">
-          <div className="w-full lg:h-[65vh]">
-            <Skeleton className="w-full h-full" />
+          <div className="w-full h-[230px] md:h-[250px] lg:h-[600px]">
+            <Skeleton className="w-full h-full object-contain" />
           </div>
-          <Skeleton count={4} style={{ marginBottom: ".4rem" }} />
         </section>
       </section>
 
-      <section className="w-full flex flex-row justify-center items-center gap-8 my-8">
+      <section className="w-full flex flex-row justify-center items-center gap-8 my-16 md:my-20">
         <Skeleton circle width={60} height={60} />
       </section>
 

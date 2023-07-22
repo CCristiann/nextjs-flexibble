@@ -1,4 +1,31 @@
+import { formProps } from "@/interfaces/interfaces";
 
+export const createProject = async (formState : formProps) =>{
+  const image = await uploadImage(formState.image);
+      formState.image = image;
+
+      try {
+        const response = await fetch("/api/project/new", {
+          method: "POST",
+          body: JSON.stringify(formState),
+        });
+
+        return response
+
+      } catch (err) {
+        console.log(err)
+      }
+}
+
+export const updateProject = async(formState: formProps, id : string) => {
+  const response = await fetch(`/api/project/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(formState)
+  })
+
+  return response
+}
+ 
 export const getAllProjects = async() => {
   const response = await fetch('/api/project', {
     method: "GET"
@@ -7,6 +34,7 @@ export const getAllProjects = async() => {
 
   return data
 }
+
 export const uploadImage = async (imagePath: string) => {
   try {
     const response = await fetch("/api/upload", {

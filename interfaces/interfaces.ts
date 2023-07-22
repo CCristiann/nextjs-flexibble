@@ -34,10 +34,5 @@ export interface projectProps {
   liveSiteUrl: string;
   githubUrl: string;
   category: string;
-  creator: {
-    name: string;
-    email: string;
-    image: string;
-    _id: string;
-  };
+  creator: string
 }

@@ -1,50 +1,157 @@
-import React, { ChangeEvent, useState } from "react";
+"use client"
+
+import React, { ChangeEvent, useEffect, useState, useReducer } from "react";
 import Image from "next/image";
 
 import ProjectFormField from "./ProjectFormField";
-import { uploadImage } from "@/utils/actions";
+import { createProject, updateProject, uploadImage } from "@/utils/actions";
 
-import { formProps } from "@/interfaces/interfaces";
+import { formProps, projectProps, userProps } from "@/interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import CategoryMenu from "./CategoryMenu";
 
 import { categoryFilters } from "@/costants/costants";
 import Button from "./Button";
-import { Session } from "next-auth";
 
-const ProjectForm = ({ type, session }: any) => {
+type ProjectDataProps = {
+  project: projectProps
+  user: userProps
+}
+
+type ProjectFormProps = {
+  type: string
+  session: any,
+  projectData?: ProjectDataProps
+}
+
+type ActionProps = 
+  | { type: 'UPDATE_INPUT', KEY: string, value: string}
+  | { type: 'UPDATE_CATEGORY', KEY: string, value: string}
+  | { type: 'UPDATE_USER', payload: {
+    name: string,
+    email: string,
+    image: string,
+    id: string
+  }}
+
+type DispatchProps = {
+  type: string
+  KEY: string
+  value: string
+}
+
+const initialState = {
+  title: "",
+  description: "",
+  image: "",
+  liveSiteUrl: "",
+  githubUrl: "",
+  category: "",
+  user: null
+}
+
+function reducer(formState : formProps, action : ActionProps) {
+  switch(action.type){
+    case 'UPDATE_INPUT':
+      return {
+        ...formState,
+        [action.KEY] :  action.value
+      };
+    
+    case 'UPDATE_CATEGORY':
+      return {
+        ...formState,
+        category: action.value
+      }
+  
+    case 'UPDATE_USER':
+      return {
+        ...formState,
+        user: action.payload
+      }
+    
+    default:
+    return formState
+  }
+}
+
+const ProjectForm = ({ type, session, projectData } : ProjectFormProps, ) => {
+
   const router = useRouter();
 
+  const [formState, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => { //Set user in the formState object
+    dispatch({
+      type: 'UPDATE_USER',
+      payload: session?.user
+    })
+
+  }, [session])
+
+  useEffect(() => { //Updating all form fields after fetching the project data
+    if(projectData){
+      dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'title',
+      value: projectData!.project.title
+    })
+    dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'description',
+      value: projectData!.project.title
+    })
+    dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'image',
+      value: projectData!.project.image
+    })
+    dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'liveSiteUrl',
+      value: projectData!.project.liveSiteUrl
+    })
+    dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'githubUrl',
+      value: projectData!.project.githubUrl
+    })
+    dispatch({
+      type: 'UPDATE_INPUT',
+      KEY: 'category',
+      value: projectData!.project.category
+    })
+    }
+  }, [projectData])
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitProject = async (formState: formProps) => {
+  
+    if(type === 'create'){
+      const response = await createProject(formState)
 
-  const [formState, setFormState] = useState({
-    title: "",
-    description: "",
-    image: "",
-    liveSiteUrl: "",
-    githubUrl: "",
-    category: "",
-    user: {},
-  });
+      if(response?.ok) router.push('/')
+    }
 
-  const [categoryState, setCategoryState] = useState();
+    if(type === 'edit'){
 
-  const createProject = async (formState: formProps) => {
-    const image = await uploadImage(formState.image);
-    formState.image = image;
-
-    try {
-      const response = await fetch("/api/project/new", {
-        method: "POST",
-        body: JSON.stringify(formState),
-      });
-
-      if (response.ok) {
-        router.push("/");
+      const isBase64DataURL = (value: string) => {
+        const base64Regex = /^data:image\/[a-z]+;base64,/;
+        return base64Regex.test(value);
       }
-    } catch (err) {
-    } finally {
-      setIsSubmitting(false);
+
+      const isUploadingNewImage = isBase64DataURL(formState.image)
+
+      if(isUploadingNewImage) {
+        const newImage =  await uploadImage(formState.image);
+        formState.image = newImage
+  
+      }
+
+      const response = await updateProject(formState, projectData?.project._id!)
+
+      if(response) router.push('/')
+      // if(response.ok) router.push('/')
     }
   };
 
@@ -53,7 +160,7 @@ const ProjectForm = ({ type, session }: any) => {
 
     setIsSubmitting(true);
 
-    createProject(formState);
+    submitProject(formState);
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,16 +181,12 @@ const ProjectForm = ({ type, session }: any) => {
     reader.onload = () => {
       const result = reader.result as string;
 
-      handleFormStateChange("image", result);
+      dispatch({
+        type: 'UPDATE_INPUT',
+        KEY: 'image',
+        value: result
+      })
     };
-  };
-
-  const handleFormStateChange = (fieldName: string, value: string) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      [fieldName]: value,
-      user: session?.user,
-    }));
   };
 
   return (
@@ -96,7 +199,7 @@ const ProjectForm = ({ type, session }: any) => {
           className="form_file-input"
           type="file"
           accept="image/*"
-          required={type === "create"}
+          required={type === "create" ? true : false}
           onChange={handleImageChange}
         />
         {formState.image && (
@@ -115,7 +218,10 @@ const ProjectForm = ({ type, session }: any) => {
           isTextArea={false}
           placeholder="Project Name"
           required={true}
-          setFormState={(value) => handleFormStateChange("title", value)}
+          state={formState.title}
+          onChange={() => {}}
+          dispatch={dispatch}
+          KEY='title'
         />
 
         <ProjectFormField
@@ -123,7 +229,10 @@ const ProjectForm = ({ type, session }: any) => {
           isTextArea={true}
           placeholder="Showcase and discover remarkable developer projects."
           required={true}
-          setFormState={(value) => handleFormStateChange("description", value)}
+          state={formState.description}
+          onChange={() => {}}
+          dispatch={dispatch}
+          KEY='description'
         />
 
         <ProjectFormField
@@ -131,7 +240,10 @@ const ProjectForm = ({ type, session }: any) => {
           isTextArea={false}
           placeholder="http://website.com"
           required={false}
-          setFormState={(value) => handleFormStateChange("liveSiteUrl", value)}
+          state={formState.liveSiteUrl}
+          onChange={() => {}}
+          dispatch={dispatch}
+          KEY='liveSiteUrl'
         />
 
         <ProjectFormField
@@ -139,14 +251,19 @@ const ProjectForm = ({ type, session }: any) => {
           isTextArea={false}
           placeholder="http://github.com/ccristiann"
           required={false}
-          setFormState={(value) => handleFormStateChange("githubUrl", value)}
+          state={formState.githubUrl}
+          onChange={() => {}}
+          dispatch={dispatch}
+          KEY='githubUrl'
         />
 
         <CategoryMenu
           title={formState.title}
           filters={categoryFilters}
-          categoryState={formState.category}
-          setCategoryState={(value) => handleFormStateChange("category", value)}
+          state={formState.category}
+          onChange={() => {}}
+          dispatch={dispatch}
+          KEY='category'
         />
       </div>
 
