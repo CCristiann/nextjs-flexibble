@@ -78,7 +78,7 @@ const ProfilePage = ({ params }: Props) => {
         {projects.length !== 0 && (
           <div>
             <Image
-              className="object-contain rounded-xl"
+              className="object-contain rounded-xl shadow-lg"
               src={projects[0].image}
               width={739}
               height={554}

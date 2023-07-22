@@ -34,7 +34,7 @@ const ProjectCard = ({ project } : any) => {
       <div className='flex flex-col gap-4'>
          <Link className='flex justify-center items-center relative w-full h-full' href={`/project/${project._id}`}>
            <Image 
-           className='w-full h-full object-cover rounded-2xl'
+           className='w-full h-full object-cover rounded-2xl shadow-md'
            src={project.image}
            width={414}
            height={314}

@@ -17,8 +17,6 @@ const Categories = () => {
 
         else router.push(`${pathName}?category=${filter}`)
     }
-
-    console.log(categorySelected)
     
   return (
     <div className='flex justify-between w-full gap-5 flex-wrap'>
