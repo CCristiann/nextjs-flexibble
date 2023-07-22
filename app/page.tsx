@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import ProjectCard from "@/components/ProjectCard";
+import { getAllProjects } from "@/utils/actions";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import ProjectCardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
-import { getAllProjects } from "@/utils/actions";
 import Categories from "@/components/Categories";
+import ProjectCard from "@/components/ProjectCard";
 
 type SearchParamsProps = {
   category?: string

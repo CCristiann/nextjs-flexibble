@@ -1,12 +1,12 @@
 "use client";
 
+import { useSession } from "next-auth/react";
+
 import Link from "next/link";
 import Image from "next/image";
 
 import { NavLinks } from "@/costants/costants";
-import Providers from "../Providers";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
+
 import ProfileMenu from "../ProfileMenu";
 
 const Navbar = () => {

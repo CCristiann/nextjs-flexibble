@@ -4,10 +4,9 @@ import React, { useEffect, useState } from "react";
 
 import ProjectCard from "./ProjectCard";
 
-import { getRelatedProjects } from "@/utils/actions";
-import { StringExpression } from "mongoose";
-
 import { userProps } from "@/interfaces/interfaces";
+
+import { getRelatedProjects } from "@/utils/actions";
 
 const RelatedProjects = ({ user } : userProps) => {
 

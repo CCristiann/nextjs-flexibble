@@ -1,5 +1,4 @@
 import mongoose, { Schema, model, models } from "mongoose";
-import { ProjectSchema } from "./project";
 
 const UserSchema = new Schema({
   email: {

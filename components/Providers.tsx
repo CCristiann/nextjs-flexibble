@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { getProviders, signIn } from "next-auth/react";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import Modal from "./Modal";

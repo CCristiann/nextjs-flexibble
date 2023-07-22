@@ -1,8 +1,10 @@
 import React from 'react'
-import { categoryFilters } from '@/costants/costants'
-import Link from 'next/link'
+
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import path from 'path'
+
+import { categoryFilters } from '@/costants/costants'
+
+
 const Categories = () => {
     const router = useRouter()
     const pathName = usePathname()

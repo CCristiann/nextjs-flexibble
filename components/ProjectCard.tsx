@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { getUserDetails } from '@/utils/actions'
 
 const ProjectCard = ({ project } : any) => {

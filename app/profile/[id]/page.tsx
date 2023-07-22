@@ -1,14 +1,14 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 
 import ProfilePageSkeleton from "@/components/skeleton/ProfilePageSkeleton";
-import ProjectCard from "@/components/ProjectCard";
-import { getRelatedProjects, getUserDetails } from "@/utils/actions";
 import RelatedProjects from "@/components/RelatedProjects";
+
+import { getRelatedProjects, getUserDetails } from "@/utils/actions";
+
 
 type Props = {
   params: {

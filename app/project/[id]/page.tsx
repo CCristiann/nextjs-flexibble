@@ -1,20 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-import RelatedProjects from "@/components/RelatedProjects";
+import { deleteProject, getProjectDetails, updateUserProjects } from "@/utils/actions";
 
 import Image from "next/image";
-
-import Modal from "@/components/Modal";
 import Link from "next/link";
+
+import ProjectPageSkeleton from "@/components/skeleton/ProjectPageSkeleton";
+import Modal from "@/components/Modal";
+import RelatedProjects from "@/components/RelatedProjects";
 
 import { BsGithub, BsFillRocketTakeoffFill } from "react-icons/bs";
 
-import ProjectPageSkeleton from "@/components/skeleton/ProjectPageSkeleton";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { deleteProject, getProjectDetails, updateUserProjects } from "@/utils/actions";
 
 type Props = {
   params: {

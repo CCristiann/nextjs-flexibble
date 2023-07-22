@@ -1,4 +1,7 @@
-"use client";
+"use client"
+
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 
 import "../styles/global.css";
 import { Inter } from "next/font/google";
@@ -6,8 +9,6 @@ import { Inter } from "next/font/google";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 
 const inter = Inter({

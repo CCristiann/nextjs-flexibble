@@ -1,10 +1,13 @@
 "use client"
 
-import ProjectForm from '@/components/ProjectForm'
 import React, { useEffect, useState } from 'react'
-import Modal from '@/components/Modal'
+
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+
+import Modal from '@/components/Modal'
+import ProjectForm from '@/components/ProjectForm'
+
 import { getProjectDetails } from '@/utils/actions'
 
 type Props = {

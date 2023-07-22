@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+
 import { footerLinks } from "@/costants/costants";
 
 interface FooterColumnProps {

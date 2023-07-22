@@ -5,7 +5,7 @@ import GitHubProvider from "next-auth/providers/github";
 import { connectToDB } from "@/utils/database";
 
 import User from "@/models/user";
-import { Session } from "next-auth";
+
 
 const handler = NextAuth({
   providers: [

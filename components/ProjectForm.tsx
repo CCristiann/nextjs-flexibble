@@ -1,17 +1,20 @@
 "use client"
 
 import React, { ChangeEvent, useEffect, useState, useReducer } from "react";
-import Image from "next/image";
 
+import { useRouter } from "next/navigation";
+
+import CategoryMenu from "./CategoryMenu";
 import ProjectFormField from "./ProjectFormField";
-import { createProject, updateProject, uploadImage } from "@/utils/actions";
+import Button from "./Button";
 
 import { formProps, projectProps, userProps } from "@/interfaces/interfaces";
-import { useRouter } from "next/navigation";
-import CategoryMenu from "./CategoryMenu";
+import { createProject, updateProject, uploadImage } from "@/utils/actions";
 
 import { categoryFilters } from "@/costants/costants";
-import Button from "./Button";
+
+
+import Image from "next/image";
 
 type ProjectDataProps = {
   project: projectProps
