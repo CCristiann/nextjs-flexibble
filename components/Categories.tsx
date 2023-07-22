@@ -33,6 +33,7 @@ const Categories = () => {
         </button>
         {categoryFilters.map((filter) => (
             <button 
+            key={filter}
             onClick={() => handleFilterClick(filter)}
             className={`${
                 categorySelected === filter 
