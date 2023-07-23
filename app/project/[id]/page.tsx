@@ -137,7 +137,7 @@ const ProjectPage = ({ params }: Props) => {
               )}
             </section>
             <section className="flex flex-col gap-8">
-              <div className="w-full lg:h-[65vh]">
+              <div className="w-full min-h-[265px] h-full sm:h-[430px] md:h-[460px] lg:h-[65vh]">
                 <Image
                   className="rounded-2xl w-full h-full object-cover"
                   src={project.image}
