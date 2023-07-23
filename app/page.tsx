@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import ProjectCardSkeleton from "@/components/skeleton/ProjectCardSkeleton";
 import Categories from "@/components/Categories";
 import ProjectCard from "@/components/ProjectCard";
+import { toast } from "react-toastify";
 
 type SearchParamsProps = {
   category?: string
@@ -43,7 +44,7 @@ export default function Home({ searchParams: { category }} : Props) {
       setIsLoading(false)
     }, 700)
   }, [category]);
-
+  
   return (
     <section>
       <Categories />

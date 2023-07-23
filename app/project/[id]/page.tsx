@@ -14,6 +14,7 @@ import Modal from "@/components/Modal";
 import RelatedProjects from "@/components/RelatedProjects";
 
 import { BsGithub, BsFillRocketTakeoffFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 
 type Props = {
@@ -59,8 +60,10 @@ const ProjectPage = ({ params }: Props) => {
         await deleteProject(params.id);
         await updateUserProjects(project.creator, params.id)
 
+        toast.success('Success')
         router.push("/");
       } catch (err) {
+        toast.error('Error')
         console.log(err);
       }
     }

@@ -4,6 +4,7 @@ import React, { ChangeEvent, useEffect, useState, useReducer } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { toast } from 'react-toastify'
 import CategoryMenu from "./CategoryMenu";
 import ProjectFormField from "./ProjectFormField";
 import Button from "./Button";
@@ -133,7 +134,13 @@ const ProjectForm = ({ type, session, projectData } : ProjectFormProps, ) => {
     if(type === 'create'){
       const response = await createProject(formState)
 
-      if(response?.ok) router.push('/')
+      if(response?.ok) {
+        toast.success('Success')
+        router.push('/')
+      } else {
+        toast.error('Error')
+        router.push('/')
+      }
     }
 
     if(type === 'edit'){
@@ -153,8 +160,10 @@ const ProjectForm = ({ type, session, projectData } : ProjectFormProps, ) => {
 
       const response = await updateProject(formState, projectData?.project._id!)
 
-      if(response) router.push('/')
-      // if(response.ok) router.push('/')
+      if(response) {
+        toast.success('Success')
+        router.push('/')
+      }                              
     }
   };
 
