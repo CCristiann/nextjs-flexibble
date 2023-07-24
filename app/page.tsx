@@ -17,7 +17,7 @@ type Props = {
   searchParams: SearchParamsProps
 }
 export default function Home({ searchParams: { category }} : Props) {
-  const [projects, setProjects] = useState<any>();
+  const [projects, setProjects] = useState([{}])
   const [isLoading, setIsLoading] = useState(true);
   const [isFiltering, setIsFiltering] = useState(false)
 
@@ -33,16 +33,16 @@ export default function Home({ searchParams: { category }} : Props) {
           const filteredProjects = data.filter((p : any) => p.category === category)
           setIsFiltering(true)
           setProjects(filteredProjects)
+        } else {
+          setProjects(data)
         }
 
-        if(!category) setProjects(data)
+      
       }
     };
     fetchProjects();
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 700)
+    setIsLoading(false)
   }, [category]);
   
   return (
