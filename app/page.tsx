@@ -25,6 +25,7 @@ export default function Home({ searchParams: { category }} : Props) {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setIsLoading(true)
       setIsFiltering(false)
       const data = await getAllProjects()
 
@@ -42,7 +43,9 @@ export default function Home({ searchParams: { category }} : Props) {
     };
     fetchProjects();
 
-    setIsLoading(false)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
   }, [category]);
   
   return (
