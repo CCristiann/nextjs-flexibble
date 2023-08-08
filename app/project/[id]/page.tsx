@@ -42,7 +42,7 @@ const ProjectPage = ({ params }: Props) => {
       
       setTimeout(() => {
         setIsLoading(false)
-      }, 500)
+      }, 600)
 
     };
 

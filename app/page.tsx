@@ -45,7 +45,7 @@ export default function Home({ searchParams: { category }} : Props) {
 
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 600)
   }, [category]);
   
   return (
